@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Patch>
-
+	
   <Operation Class="PatchOperationFindMod">
     <mods>
       <li>Combat Extended</li>
@@ -33,7 +33,6 @@
 			   
       </operations>
     </match>
-	
 	
   </Operation>
   

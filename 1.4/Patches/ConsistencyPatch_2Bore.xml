@@ -1,0 +1,26 @@
+<Patch>
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>CE 2-Bore</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <operations>
+			
+                <li Class="PatchOperationRePlace">
+					<xpath>/Defs/ThingDef[defName="CE_Gun_2BoreMusket"]/recipeMaker/researchPrerequisite</xpath>
+					<value>
+						<researchPrerequisite>Stage1Rifle_BP</researchPrerequisite>
+                    </value>
+                </li>
+
+				<li Class="PatchOperationRePlace">
+					<xpath>/Defs/ThingDef[defName="CE_Gun_LilDuce"]/recipeMaker/researchPrerequisite</xpath>
+					<value>
+						<researchPrerequisite>Stage1Rifle_BP</researchPrerequisite>
+					</value>
+				</li>	
+				
+			</operations>					
+        </match>
+    </Operation>
+</Patch>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingCategoryDef>
+		<defName>MortarGrenade</defName>
+		<label>Mortar Grenade</label>
+		<parent>AmmoGrenades</parent>
+		<iconPath>UI/Icons/ThingCategories/CaliberGrenade</iconPath>
+	</ThingCategoryDef>
+
+	<!-- ==================== AmmoSet ========================== -->
+	
+	<CombatExtended.AmmoSetDef>
+		<defName>AmmoSet_MortarGrenade</defName>
+		<label>Mortar Grenades</label>
+		<ammoTypes>
+			<Ammo_MortarGrenade>Bullet_MortarGrenade</Ammo_MortarGrenade>
+			<Ammo_TA_SmokeGrenade>Bullet_MotarSmokeGrenade</Ammo_TA_SmokeGrenade>
+		</ammoTypes>
+	</CombatExtended.AmmoSetDef>
+
+	<!-- ==================== Ammo ========================== -->
+
+	<ThingDef Class="CombatExtended.AmmoDef" Name="HandMortarBombBase" ParentName="AmmoBase" Abstract="True">
+		<description>Low velocity grenade fired from a hand mortar, can also be thrown.</description>
+		<tradeTags>
+			<li>CE_AutoEnableTrade</li>
+			<li>CE_AutoEnableCrafting_FueledSmithy</li>
+			<li>CE_AutoEnableCrafting_ElectricSmithy</li>
+		</tradeTags>
+		<thingCategories>
+			<li>MortarGrenade</li>
+		</thingCategories>
+		<stackLimit>45</stackLimit>
+		<cookOffFlashScale>20</cookOffFlashScale>
+		<techLevel>Medieval</techLevel>
+	</ThingDef>
+
+	<!-- ================== Projectiles ================== -->
+	<!--base CE mortar grenade overwrite-->
+	<ThingDef ParentName="BaseExplosiveBullet" Name="Bullet_MortarGrenade">
+		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+		<defName>Bullet_MortarGrenade</defName>
+		<label>mortar Grenade</label>
+		<graphicData>
+			<texPath>Things/Projectile/Grenades/oldFrag180</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(0.45,0.45)</drawSize>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageDef>Bomb</damageDef>
+			<damageAmountBase>33</damageAmountBase>
+			<explosionRadius>1.0</explosionRadius>
+			<speed>25</speed>
+			<applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+			<suppressionFactor>3.0</suppressionFactor>
+			<dangerFactor>2.0</dangerFactor>
+			<airborneSuppressionFactor>0.25</airborneSuppressionFactor>
+			<explosionDelay>35</explosionDelay>
+			<dropsCasings>false</dropsCasings>
+		</projectile>
+		<comps>
+			<li Class="CombatExtended.CompProperties_Fragments">
+				<fragments>
+					<Fragment_Medium>10</Fragment_Medium>
+				</fragments>
+			</li>
+		</comps>
+	</ThingDef>
+
+	<ThingDef ParentName="Bullet_MortarGrenade">
+		<defName>Bullet_MotarSmokeGrenade</defName>
+		<label>mortar Grenade smoke</label>
+		<graphicData>
+			<texPath>Things/Projectile/Grenades/SmokeGrenade_projectile</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>3.5</explosionRadius>
+			<damageDef>Smoke</damageDef>
+			<postExplosionGasType>BlindSmoke</postExplosionGasType>
+			<preExplosionSpawnChance>1</preExplosionSpawnChance>
+			<explosionDelay>35</explosionDelay>
+			<screenShakeFactor>0</screenShakeFactor>
+		</projectile>
+	</ThingDef>
+
+	<!--bursting grenade throwable-->	
+	<ThingDef ParentName="Bullet_MortarGrenade">
+		<defName>Bullet_MortarGrenade_thrown</defName>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<speed>10</speed>
+			<explosionDelay>80</explosionDelay>
+		</projectile>
+	</ThingDef>
+	
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="HandMortarBombBase">
+		<defName>Ammo_MortarGrenade</defName>
+		<label>Mortar Grenade</label>
+		<description>cast iron shell filled with gunpowder, fitted with fuse.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponThrown/MortarBomb</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.75</drawSize>
+		</graphicData>
+		<equipmentType>Primary</equipmentType>
+		<soundInteract>Interact_Grenade</soundInteract>	
+		<statBases>
+			<Mass>0.9</Mass>
+			<Bulk>1</Bulk>
+			<MarketValue>12.4</MarketValue>
+			<SightsEfficiency>0.65</SightsEfficiency>
+			<RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
+		</statBases>
+		<generateCommonality>2.0</generateCommonality>
+		<weaponTags>
+			<li>CE_AI_AOE</li>
+			<li>GrenadeDestructive</li>
+			<li>CE_OneHandedWeapon</li>
+		</weaponTags>
+		<ammoClass>BurstingShell</ammoClass>
+		<tickerType>Normal</tickerType>
+		<resourceReadoutPriority>First</resourceReadoutPriority>
+		<verbs>
+			<li Class="CombatExtended.VerbPropertiesCE">
+				<label>throw hand mortar bomb</label>
+				<verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<range>10.0</range>
+				<minRange>2.9</minRange>
+				<warmupTime>1</warmupTime>
+				<noiseRadius>4</noiseRadius>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<soundCast>ThrowGrenade</soundCast>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<defaultProjectile>Bullet_MortarGrenade_thrown</defaultProjectile>
+				<onlyManualCast>true</onlyManualCast>
+				<ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+				<ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompEquippable</compClass>
+			</li>
+		</comps>
+		<detonateProjectile>Bullet_MortarGrenade</detonateProjectile>
+	</ThingDef>	
+	
+	<!--smoke grenade throwable-->	
+	<ThingDef ParentName="BaseExplosiveBullet">
+		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+		<defName>Bullet_TA_SmokeGrenade_thrown</defName>
+		<label>mortar Grenade smoke</label>
+		<graphicData>
+			<texPath>Things/Projectile/Grenades/SmokeGrenade_projectile</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>0.78</drawSize>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<explosionRadius>3.5</explosionRadius>
+			<damageDef>Smoke</damageDef>
+			<suppressionFactor>0.0</suppressionFactor>
+			<dangerFactor>0.0</dangerFactor>
+			<explosionDelay>60</explosionDelay>
+			<postExplosionGasType>BlindSmoke</postExplosionGasType>
+			<preExplosionSpawnChance>1</preExplosionSpawnChance>
+			<speed>12</speed>
+			<screenShakeFactor>0</screenShakeFactor>
+			<dropsCasings>false</dropsCasings>
+		</projectile>
+	</ThingDef>
+
+	<ThingDef Class="CombatExtended.AmmoDef" ParentName="HandMortarBombBase">
+		<defName>Ammo_TA_SmokeGrenade</defName>
+		<label>mortar Grenade smoke</label>
+		<description>paper machet shell filled with a gunpowder mix that burns into thick smoke, fitted with fuse.</description>
+		<graphicData>
+			<texPath>Things/Item/Equipment/WeaponThrown/MortorSmoke</texPath>
+			<graphicClass>Graphic_StackCount</graphicClass>
+			<drawSize>0.75</drawSize>
+		</graphicData>
+		<equipmentType>Primary</equipmentType>
+		<soundInteract>Interact_Grenade</soundInteract>
+		<statBases>
+			<Mass>0.6</Mass>
+			<Bulk>1</Bulk>
+			<MarketValue>12.4</MarketValue>
+			<SightsEfficiency>0.65</SightsEfficiency>
+			<RangedWeapon_Cooldown>0.8</RangedWeapon_Cooldown>
+		</statBases>
+		<weaponTags>
+			<li>CE_AI_SMOKE</li>
+			<li>GrenadeSmoke</li>
+			<li>CE_OneHandedWeapon</li>
+		</weaponTags>
+		<ammoClass>Smoke</ammoClass>
+		<generateAllowChance>0.25</generateAllowChance>
+		<tickerType>Normal</tickerType>
+		<resourceReadoutPriority>First</resourceReadoutPriority>
+		<verbs>
+			<li Class="CombatExtended.VerbPropertiesCE">
+				<label>throw hand mortar smoke Grenade</label>
+				<verbClass>CombatExtended.Verb_ShootCEOneUse</verbClass>
+				<hasStandardCommand>true</hasStandardCommand>
+				<range>11.0</range>
+				<minRange>2.9</minRange>
+				<warmupTime>1</warmupTime>
+				<noiseRadius>4</noiseRadius>
+				<ai_IsBuildingDestroyer>true</ai_IsBuildingDestroyer>
+				<soundCast>ThrowGrenade</soundCast>
+				<targetParams>
+					<canTargetLocations>true</canTargetLocations>
+				</targetParams>
+				<defaultProjectile>Bullet_TA_SmokeGrenade_thrown</defaultProjectile>
+				<onlyManualCast>true</onlyManualCast>
+				<ignorePartialLoSBlocker>true</ignorePartialLoSBlocker>
+				<ai_AvoidFriendlyFireRadius>6</ai_AvoidFriendlyFireRadius>
+			</li>
+		</verbs>
+		<comps>
+			<li Class="CompProperties_Forbiddable" />
+			<li>
+				<compClass>CompEquippable</compClass>
+			</li>
+		</comps>
+		<detonateProjectile>Bullet_TA_SmokeGrenade_thrown</detonateProjectile>
+	</ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+
+	<RecipeDef ParentName="GrenadeRecipeBase">
+		<defName>MakeAmmo_TA_SmokeGrenades</defName>
+		<label>Make hand mortar Grenade smoke x10</label>
+		<description>Craft 10 hand mortar Grenade smokes</description>
+		<jobString>Making hand mortar Grenade smokes</jobString>
+		<researchPrerequisites>
+			<li>CE_Gunpowder</li>
+		</researchPrerequisites>	
+		<recipeUsers>
+			<li>ElectricSmithy</li>
+			<li>FueledSmithy</li>
+		</recipeUsers>	
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</filter>
+				<count>10</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Prometheum</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Prometheum</li>
+				<li>Cloth</li>
+				<li>WoodLog</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_TA_SmokeGrenade>10</Ammo_TA_SmokeGrenade>
+		</products>
+		<workAmount>2800</workAmount>
+	</RecipeDef>
+
+	<RecipeDef ParentName="GrenadeRecipeBase">
+		<defName>MakeAmmo_MortarGrenade</defName>
+		<label>Make hand mortar Grenade x10</label>
+		<description>Craft 10 hand mortar Grenades</description>
+		<jobString>Making hand mortar Grenades</jobString>
+		<researchPrerequisites>
+			<li>CE_Gunpowder</li>
+		</researchPrerequisites>	
+		<recipeUsers>
+			<li>ElectricSmithy</li>
+			<li>FueledSmithy</li>
+		</recipeUsers>	
+		<ingredients>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Steel</li>
+					</thingDefs>
+				</filter>
+				<count>20</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>FSX</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>WoodLog</li>
+					</thingDefs>
+				</filter>
+				<count>3</count>
+			</li>
+			<li>
+				<filter>
+					<thingDefs>
+						<li>Cloth</li>
+					</thingDefs>
+				</filter>
+				<count>2</count>
+			</li>
+		</ingredients>
+		<fixedIngredientFilter>
+			<thingDefs>
+				<li>Steel</li>
+				<li>FSX</li>
+				<li>WoodLog</li>
+				<li>Cloth</li>
+			</thingDefs>
+		</fixedIngredientFilter>
+		<products>
+			<Ammo_MortarGrenade>10</Ammo_MortarGrenade>
+		</products>
+		<workAmount>4000</workAmount>
+	</RecipeDef>	
+	
+				
+</Defs>

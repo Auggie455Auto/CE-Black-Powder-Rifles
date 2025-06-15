@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- ========== Tribal ========== -->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/PawnKindDef[defName="Tribal_Hunter"]/weaponMoney</xpath>
+    <value>
+        <weaponMoney>50~290</weaponMoney>		
+    </value>
+  </Operation>   
+
+</Patch>

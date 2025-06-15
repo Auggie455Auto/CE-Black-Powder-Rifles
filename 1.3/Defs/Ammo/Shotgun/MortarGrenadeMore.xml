@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<!-- ==================== AmmoSet ========================== -->
+
+	<!-- ==================== Ammo ========================== -->	
+
+  <ThingDef Class="CombatExtended.AmmoDef" ParentName="HandMortarBombBase">
+    <defName>Ammo_MortarGrenadeFlare</defName>
+    <label>mortar flare</label>
+    <graphicData>
+      <texPath>Things/Ammo/Medieval/BallGrenade</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+	<statBases>
+		<Mass>0.75</Mass>
+		<Bulk>0.5</Bulk>
+		<MarketValue>2.37</MarketValue>
+    </statBases>
+    <ammoClass>Flare</ammoClass>
+    <generateAllowChance>0</generateAllowChance>
+    <detonateProjectile>Bullet_MortarGrenadeFlare</detonateProjectile>
+  </ThingDef>
+
+  <ThingDef ParentName="BaseFlareBullet">
+    <defName>Bullet_MortarGrenadeFlare</defName>
+    <graphicData>
+      <texPath>Things/Projectile/Grenades/BallGrenade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <label>mortar Flare</label>
+    <projectile Class="CombatExtended.ProjectilePropertiesCE">
+      <damageDef>Smoke</damageDef>
+      <armorPenetrationSharp>0</armorPenetrationSharp>
+      <armorPenetrationBlunt>0</armorPenetrationBlunt>
+      <speed>20</speed>
+    </projectile>
+  </ThingDef>
+
+	<!-- ==================== Recipes ========================== -->
+	
+	<RecipeDef ParentName="AmmoRecipeBase">
+	<defName>MakeAmmo_MortarGrenadeFlare</defName>
+	<label>Make Mortar flare Grenade x6</label>
+	<description>Craft 6 Mortar flare Grenades</description>
+	<jobString>Making Mortar flare Grenades</jobString>
+	<ingredients>
+		<li>
+		<filter>
+			<thingDefs>
+			<li>Steel</li>
+			</thingDefs>
+		</filter>
+		<count>15</count>
+		</li>
+		<li>
+		<filter>
+			<thingDefs>
+			<li>Prometheum</li>
+			</thingDefs>
+		</filter>
+		<count>2</count>
+		</li>
+	</ingredients>
+	<fixedIngredientFilter>
+		<thingDefs>
+		<li>Steel</li>
+		<li>Prometheum</li>
+		</thingDefs>
+	</fixedIngredientFilter>
+	<products>
+		<Ammo_MortarGrenadeFlare>6</Ammo_MortarGrenadeFlare>
+	</products>
+	<workAmount>6500</workAmount>
+	</RecipeDef>
+				
+</Defs>

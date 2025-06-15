@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Flintolcks Extended</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <operations>
+			
+			<!-- I give up patching for this shit tbh, they overlap a lot-->				
+
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/label</xpath>
+					<value>
+						<label>Heavy Flintlock Pistol</label>
+					</value>
+				</li>			
+				
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/ammoSet</xpath>
+                    <value>
+                         <ammoSet>AmmoSet_SlowMusketBallFull</ammoSet>
+                    </value>
+                </li>	
+				
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/reloadTime</xpath>
+                    <value>
+                         <reloadTime>7</reloadTime>
+                    </value>
+                </li>	
+
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/AmmoGenPerMagOverride</xpath>
+                    <value>
+                         <AmmoGenPerMagOverride>2</AmmoGenPerMagOverride>
+                    </value>
+                </li>										
+				
+                <li Class="PatchOperationRemove">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockMusket"]</xpath>
+                </li> 
+				
+                <li Class="PatchOperationRemove">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_WallGun"]</xpath>
+                </li>									
+
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockBlunderbuss"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/reloadTime</xpath>
+                    <value>
+                         <reloadTime>8</reloadTime>
+                    </value>
+                </li>			
+
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockBlunderbuss"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/AmmoGenPerMagOverride</xpath>
+                    <value>
+                         <AmmoGenPerMagOverride>2</AmmoGenPerMagOverride>
+                    </value>
+                </li>				
+				
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockBlunderbuss"]/label</xpath>
+					<value>
+						<label>Flintlock Blunderbuss</label>
+					</value>
+				</li>			
+			
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/costList</xpath>
+					<value>
+						<ComponentIndustrial>1</ComponentIndustrial>
+					</value>
+				</li>		
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_FlintlockBlunderbuss"]/costList</xpath>
+					<value>
+						<ComponentIndustrial>1</ComponentIndustrial>
+					</value>
+				</li>									
+				
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_FlintlockPistol"]/weaponTags</xpath>
+					<value>
+						<li>NeolithicRangedDecent</li>
+					</value>
+				</li>	
+		
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_FlintlockBlunderbuss"]/weaponTags</xpath>
+					<value>
+						<li>NeolithicRangedDecent</li>
+					</value>
+				</li>			
+				
+				<li Class="PatchOperationReplace">
+					<xpath>/Defs/ThingDef[defName="CE_Gun_HandMortar"]/label</xpath>
+					<value>
+						<label>Flintlock hand mortar</label>
+					</value>
+				</li>	
+				
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_HandMortar"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/reloadTime</xpath>
+                    <value>
+                         <reloadTime>10</reloadTime>
+                    </value>
+                </li>	
+
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_HandMortar"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/AmmoGenPerMagOverride</xpath>
+                    <value>
+                         <AmmoGenPerMagOverride>2</AmmoGenPerMagOverride>
+                    </value>
+                </li>				
+
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_HandMortar"]/costList</xpath>
+					<value>
+						<ComponentIndustrial>1</ComponentIndustrial>
+					</value>
+				</li>			
+
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockRifle"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/ammoSet</xpath>
+                    <value>
+                         <ammoSet>AmmoSet_FastMusketBallOnly</ammoSet>
+                    </value>
+                </li>
+				
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockRifle"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/reloadTime</xpath>
+                    <value>
+                         <reloadTime>10</reloadTime>
+                    </value>
+                </li>	
+				
+				<li Class="PatchOperationReplace">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_FlintlockRifle"]/comps/li[@Class="CombatExtended.CompProperties_AmmoUser"]/AmmoGenPerMagOverride</xpath>
+                    <value>
+                         <AmmoGenPerMagOverride>2</AmmoGenPerMagOverride>
+                    </value>
+                </li>		
+				
+				<li Class="PatchOperationAdd">
+					<xpath>Defs/ThingDef[defName="CE_Gun_FlintlockRifle"]/costList</xpath>
+					<value>
+						<ComponentIndustrial>1</ComponentIndustrial>
+					</value>
+				</li>					
+
+                <li Class="PatchOperationRemove">
+                    <xpath>/Defs/ThingDef[defName="CE_Gun_WallGun"]</xpath>
+                </li>					
+			
+            </operations>
+        </match>
+    </Operation>
+</Patch>
